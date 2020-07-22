@@ -8,8 +8,10 @@ import 'package:flutter_zhuyi_test/model/config_model.dart';
 import 'package:flutter_zhuyi_test/model/grid_nav_model.dart';
 import 'package:flutter_zhuyi_test/model/home_model.dart';
 import 'package:flutter_zhuyi_test/model/sales_box_model.dart';
+import 'package:flutter_zhuyi_test/widget/grid_nav.dart';
 import 'package:flutter_zhuyi_test/widget/loading_container.dart';
 import 'package:flutter_zhuyi_test/widget/local_nav.dart';
+import 'package:flutter_zhuyi_test/widget/sub_nav.dart';
 import 'package:flutter_zhuyi_test/widget/webview.dart';
 import 'package:flutter_zhuyi_test/util/navigator_util.dart';
 const APPBAR_SCROLL_OFFSET = 100;
@@ -115,6 +117,13 @@ class _HomePageState extends State<HomePage> {
         Padding(
             child: LocalNav(localNavList: localNavList),
             padding: EdgeInsets.fromLTRB(7, 4, 7, 4)),
+        Padding(///网格布局
+            child: GridNav(gridNavModel: gridNavModel),
+            padding: EdgeInsets.fromLTRB(7, 4, 7, 4)),
+        Padding(
+            padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+            child: SubNav(subNavList: subNavList),
+        )
       ],
     );
   }
