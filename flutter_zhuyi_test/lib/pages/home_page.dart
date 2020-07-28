@@ -11,6 +11,7 @@ import 'package:flutter_zhuyi_test/model/sales_box_model.dart';
 import 'package:flutter_zhuyi_test/widget/grid_nav.dart';
 import 'package:flutter_zhuyi_test/widget/loading_container.dart';
 import 'package:flutter_zhuyi_test/widget/local_nav.dart';
+import 'package:flutter_zhuyi_test/widget/sales_box.dart';
 import 'package:flutter_zhuyi_test/widget/sub_nav.dart';
 import 'package:flutter_zhuyi_test/widget/webview.dart';
 import 'package:flutter_zhuyi_test/util/navigator_util.dart';
@@ -123,7 +124,11 @@ class _HomePageState extends State<HomePage> {
         Padding(
             padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
             child: SubNav(subNavList: subNavList),
-        )
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+          child: SalesBox(salesBox: salesBoxModel),
+        ),
       ],
     );
   }
