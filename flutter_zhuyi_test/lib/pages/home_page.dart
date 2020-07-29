@@ -8,10 +8,12 @@ import 'package:flutter_zhuyi_test/model/config_model.dart';
 import 'package:flutter_zhuyi_test/model/grid_nav_model.dart';
 import 'package:flutter_zhuyi_test/model/home_model.dart';
 import 'package:flutter_zhuyi_test/model/sales_box_model.dart';
+import 'package:flutter_zhuyi_test/pages/search_page.dart';
 import 'package:flutter_zhuyi_test/widget/grid_nav.dart';
 import 'package:flutter_zhuyi_test/widget/loading_container.dart';
 import 'package:flutter_zhuyi_test/widget/local_nav.dart';
 import 'package:flutter_zhuyi_test/widget/sales_box.dart';
+import 'package:flutter_zhuyi_test/widget/search_bar.dart';
 import 'package:flutter_zhuyi_test/widget/sub_nav.dart';
 import 'package:flutter_zhuyi_test/widget/webview.dart';
 import 'package:flutter_zhuyi_test/util/navigator_util.dart';
@@ -151,6 +153,13 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(
               color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255),
             ),
+            child: SearchBar(
+              searchBarType: appBarAlpha>0.2?SearchBarType.homeLight:SearchBarType.home,
+              inputBoxClick: _jumpToSearch,
+              speakClick: _jumpToSpeak,
+              defaultText: SEARCH_BAR_DEFAULT_TEXT,
+              leftButtonClick: (){},
+            ),
           ),
         ),
         Container(
@@ -187,5 +196,13 @@ class _HomePageState extends State<HomePage> {
         pagination: SwiperPagination(),//显示小圆点
       ),
     );
+  }
+
+  void _jumpToSearch() {
+
+  }
+
+  void _jumpToSpeak() {
+
   }
 }

@@ -85,7 +85,43 @@ class _SearchBarState extends State<SearchBar>{
   }
 
   _genHomeSearch() {
-
+    return Container(
+      child: Row(
+        children: <Widget>[
+          _wrapTap(
+              Container(
+                padding: EdgeInsets.fromLTRB(6, 6, 6, 6),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      '上海',
+                      style: TextStyle(color: _homeFontColor(),fontSize: 14),
+                    ),
+                    Icon(
+                      Icons.expand_more,
+                      color: _homeFontColor(),
+                      size: 22,
+                    )
+                  ],
+                ),
+              ), widget.leftButtonClick),
+          Expanded(
+              flex: 1,
+              child: _inputBox()
+          ),
+          _wrapTap(
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                child: Icon(
+                  Icons.comment,
+                  color: _homeFontColor(),
+                  size: 26,
+                ),
+              ),
+              widget.rightButtonClick)
+        ],
+      ),
+    );
   }
 
 
@@ -99,6 +135,100 @@ class _SearchBarState extends State<SearchBar>{
   }
 
   _inputBox() {
+    Color inputBoxColor;
+    if(widget.searchBarType == SearchBarType.home){
+      inputBoxColor = Colors.white;
+    }else{
+      inputBoxColor = Color(int.parse('0xffEDEDED'));
+    }
+    return Container(
+      height: 30,
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      decoration: BoxDecoration(
+        color: inputBoxColor,
+        borderRadius: BorderRadius.circular(
+          widget.searchBarType == SearchBarType.normal?5:15
+        ),
+      ),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            Icons.search,
+            size: 20,
+            color: widget.searchBarType == SearchBarType.normal?Color(0xffA9A9A9):Colors.blue,
+          ),
+          Expanded(
+            flex: 1,
+            child: widget.searchBarType == SearchBarType.normal?TextField(
+              controller: _controller,
+              onChanged: _onChanged,
+              autofocus: true,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w300
+              ),
+              //输入文本样式
+              decoration: InputDecoration(
+                contentPadding:
+                //flutter sdk >= v1.12.1 输入框样式适配
+                EdgeInsets.only(left: 5, bottom: 12, right: 5),
+                border: InputBorder.none,
+                hintText: widget.hint??'',
+                hintStyle: TextStyle(fontSize: 15),
+              ),
+            )
+            :_wrapTap(
+                Container(
+                  child: Text(
+                    widget.defaultText,
+                  style: TextStyle(
+                  fontSize: 13,color: Colors.grey
+                    ),
+                  ),
+                ),
+                widget.inputBoxClick)
+          ),
+          !showClear?_wrapTap(
+              Icon(
+              Icons.mic,
+              size: 22,
+              color: widget.searchBarType == SearchBarType.normal?Colors.blue:Colors.grey,
+          ), widget.speakClick)
+              :_wrapTap(
+              Icon(
+                Icons.clear,
+                size: 22,
+                color: Colors.grey,
+              ), (){
+                setState(() {
+                  _controller.clear();
+                });
+                _onChanged('');
+              })
+        ],
+      ),
+    );
+  }
 
+  _onChanged(String text) {
+      if(text.length>0){
+        setState(() {
+          showClear = true;
+        });
+      }else{
+        setState(() {
+          showClear = false;
+        });
+      }
+      if(widget.onChanged != null){
+        widget.onChanged(text);
+      }
+  }
+
+  _homeFontColor() {
+    return widget.searchBarType == SearchBarType.homeLight
+        ? Colors.black54
+        : Colors.white;
   }
 }
