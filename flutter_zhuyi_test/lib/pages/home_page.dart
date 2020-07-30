@@ -199,7 +199,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _jumpToSearch() {
-
+      NavigatorUtil.push(context, SearchPage(
+          hint: SEARCH_BAR_DEFAULT_TEXT,
+      ));
   }
 
   void _jumpToSpeak() {
