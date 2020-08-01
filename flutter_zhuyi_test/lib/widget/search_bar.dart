@@ -162,7 +162,7 @@ class _SearchBarState extends State<SearchBar>{
             child: widget.searchBarType == SearchBarType.normal?TextField(
               controller: _controller,
               onChanged: _onChanged,
-              autofocus: true,
+              autofocus: true,//是否弹起键盘
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black,
